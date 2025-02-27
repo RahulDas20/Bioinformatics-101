@@ -55,4 +55,9 @@ complete_data <- data_long %>%
   left_join(.,metadata_modified, by = c("sample" = "description"))
 
 
-#
+#explore data
+complete_data %>%
+  filter(gene == "BRCA1" | gene == "BRCA2") %>%
+  group_by(gene, tissue) %>%
+  summarise(mean_FPKM = mean(FPKM))
+  
