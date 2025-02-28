@@ -28,5 +28,14 @@ complete_data %>%
   geom_smooth(method = "lm", se = FALSE)
 
 
-#
+#heat map of different genes
+genes_of_interest <- c('BRCA1','BRCA2','TP53','ALK','MYCN')
 
+
+P <- complete_data %>%
+  filter(gene %in% genes_of_interest) %>%
+  ggplot(.,aes(sample, gene, fill = FPKM)) +
+  geom_tile() +
+  scale_fill_gradient(low = 'white', high = 'red')
+
+ggsave(P, filename = "heatmap_save1.pdf", width = 10, height = 8)
